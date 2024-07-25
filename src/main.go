@@ -1,6 +1,10 @@
 package main
 
 import (
+	"time"
+	"vu/ase/distance/src/publisher"
+	"vu/ase/distance/src/sensor"
+
 	pb_systemmanager_messages "github.com/VU-ASE/pkg-CommunicationDefinitions/v2/packages/go/systemmanager"
 	servicerunner "github.com/VU-ASE/pkg-ServiceRunner/v2/src"
 
@@ -12,18 +16,32 @@ func run(
 	sysMan servicerunner.SystemManagerInfo,
 	initialTuning *pb_systemmanager_messages.TuningState) error {
 
-	log.Info().Str("Planet", "Earth").Msg("Hello world")
+	// Get the polling rate from the service yaml
+	pollDelay, err := servicerunner.GetTuningInt("polling-delay", initialTuning)
+	if err != nil {
+		return err
+	}
+	pollRate := time.Duration(pollDelay) * time.Millisecond
 
-	//TODO: Implement the service logic here. Likely this will involve creating a pub/sub and some main logic.
-	//      The de facto standard is to have some read (zmq/IO), some handling logic (may be several items),
-	//      and some write (zmq/IO). The go routines typically communicate via channels.
+	// Start the publisher
+	pubAddr, err := service.GetOutputAddress("distance")
+	if err != nil {
+		return err
+	}
 
-	return nil
+	distanceSensor := sensor.NewURM09(pollRate)
+	pub := publisher.NewPubDistance(pubAddr, distanceSensor.GetOutgress())
+
+	go distanceSensor.Run()
+	go pub.Run()
+
+	select {}
+
+	return nil /* Unreachable */
 }
 
 func onTuningState(newtuning *pb_systemmanager_messages.TuningState) {
 	log.Info().Str("Value", newtuning.String()).Msg("Received tuning state from system manager")
-	//TODO: Update this service based on the new tuning state
 }
 
 func main() {
