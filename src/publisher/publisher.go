@@ -23,7 +23,10 @@ type PubDistance struct {
 // Create new publisher instance and return its pointer
 func NewPubDistance(serverAddr string, in shareddata.DistanceChan) *PubDistance {
 	p := &PubDistance{}
-	p.Init(serverAddr, in)
+	var err = p.Init(serverAddr, in)
+	if err != nil {
+		return nil
+	}
 	return p
 }
 
@@ -35,14 +38,12 @@ func (p *PubDistance) Init(serverAddr string, in shareddata.DistanceChan) error 
 }
 
 // Run starts the distance client, calling and handling errors of Start()
-func (p *PubDistance) Run() error {
+func (p *PubDistance) Run() {
 	log.Info().Msg("Starting distance client")
 	err := p.Start()
 	if err != nil {
 		log.Err(err).Msg("Failed to start distance client")
 	}
-
-	return nil
 }
 
 // Start starts the distance publisher, reading from the ingress

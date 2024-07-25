@@ -36,8 +36,6 @@ func run(
 	go pub.Run()
 
 	select {}
-
-	return nil /* Unreachable */
 }
 
 func onTuningState(newtuning *pb_systemmanager_messages.TuningState) {
