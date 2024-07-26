@@ -3,7 +3,7 @@ package publisher
 import (
 	"time"
 
-	pb_module_outputs "github.com/VU-ASE/pkg-CommunicationDefinitions/v2/packages/go/outputs"
+	pb_module_outputs "github.com/VU-ASE/rovercom/packages/go/outputs"
 	"google.golang.org/protobuf/proto"
 
 	shareddata "vu/ase/distance/src/shareddata"

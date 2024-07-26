@@ -2,11 +2,12 @@ package main
 
 import (
 	"time"
+	"os"
 	"vu/ase/distance/src/publisher"
 	"vu/ase/distance/src/sensor"
 
-	pb_systemmanager_messages "github.com/VU-ASE/pkg-CommunicationDefinitions/v2/packages/go/systemmanager"
-	servicerunner "github.com/VU-ASE/pkg-ServiceRunner/v2/src"
+	pb_core_messages "github.com/VU-ASE/rovercom/packages/go/core"
+	servicerunner "github.com/VU-ASE/roverlib/src"
 
 	"github.com/rs/zerolog/log"
 )
@@ -14,7 +15,7 @@ import (
 func run(
 	service servicerunner.ResolvedService,
 	sysMan servicerunner.SystemManagerInfo,
-	initialTuning *pb_systemmanager_messages.TuningState) error {
+	initialTuning *pb_core_messages.TuningState) error {
 
 	// Get the polling rate from the service yaml
 	pollDelay, err := servicerunner.GetTuningInt("polling-delay", initialTuning)
@@ -38,10 +39,14 @@ func run(
 	select {}
 }
 
-func onTuningState(newtuning *pb_systemmanager_messages.TuningState) {
+func onTuningState(newtuning *pb_core_messages.TuningState) {
 	log.Info().Str("Value", newtuning.String()).Msg("Received tuning state from system manager")
 }
 
+func onTerminate(signal os.Signal) {
+
+}
+
 func main() {
-	servicerunner.Run(run, onTuningState, false)
+	servicerunner.Run(run, onTuningState, onTerminate, false)
 }
