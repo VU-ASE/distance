@@ -14,7 +14,7 @@ import (
 
 func run(
 	service servicerunner.ResolvedService,
-	sysMan servicerunner.SystemManagerInfo,
+	sysMan servicerunner.CoreInfo,
 	initialTuning *pb_core_messages.TuningState) error {
 
 	// Get the polling rate from the service yaml
