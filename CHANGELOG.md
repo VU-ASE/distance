@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/VU-ASE/distance/compare/v1.0.0...v1.0.1) (2024-07-29)
+
+
+### Bug Fixes
+
+* rename CoreInfo ([f0d5e18](https://github.com/VU-ASE/distance/commit/f0d5e182271d5cb83eba61d4665c080662ce9375))
+
 ## 1.0.0 (2024-07-26)
 
 
