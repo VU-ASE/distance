@@ -13,6 +13,9 @@ require (
 )
 
 require (
+	github.com/MrBuggy-Amsterdam/buggy-log v1.0.1 // indirect
+	github.com/MrBuggy-Amsterdam/go-urm09driver v1.0.0 // indirect
+	github.com/corrupt/go-smbus v0.0.0-20161116095124-d22f26546b05 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/pebbe/zmq4 v1.2.11 // indirect
