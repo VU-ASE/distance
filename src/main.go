@@ -64,7 +64,7 @@ func run(service roverlib.Service, configuration *roverlib.ServiceConfiguration)
 	}
 	log.Info().Msgf("Fetched runtime configuration polling delay: %f", pollDelay)
 
-	writeStream := service.GetWriteStream("decision")
+	writeStream := service.GetWriteStream("distance-m")
 	if writeStream == nil {
 		return fmt.Errorf("failed to get write stream")
 	}
@@ -81,7 +81,6 @@ func run(service roverlib.Service, configuration *roverlib.ServiceConfiguration)
 
 		distance, err := distanceSensor.urm.ReadDistance()
 		if err != nil {
-			// log.Err(err).Msg("Failed to read distance")
 			log.Info().Msg("Failed to read distance")
 			time.Sleep(distanceSensor.pollRate)
 			continue
