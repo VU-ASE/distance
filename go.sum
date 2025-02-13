@@ -6,6 +6,8 @@ github.com/VU-ASE/rovercom v1.5.1 h1:2lbaZ0ZS1AC8XamyBzCKAsvKX7JFiTibS/fdWdKRwtU
 github.com/VU-ASE/rovercom v1.5.1/go.mod h1:1T9bXpOPMMkubm6YBa847vseBRALFzq8lkDx96w0Hr8=
 github.com/VU-ASE/roverlib-go v1.2.0 h1:52fEzJAExaWqOLy0meBmAExWBEOnrxAsIzQK0ErdM3k=
 github.com/VU-ASE/roverlib-go v1.2.0/go.mod h1:wCre2f0pgcCOjM+9HPNdWxqF/ZsS/EgEyy6bJWjXjW0=
+github.com/VU-ASE/roverlib-go v1.2.6 h1:2AxTKCJeOt1XT1O6q5nMQmSrbOfrlBhgS/mBf3rZ6JE=
+github.com/VU-ASE/roverlib-go v1.2.6/go.mod h1:wCre2f0pgcCOjM+9HPNdWxqF/ZsS/EgEyy6bJWjXjW0=
 github.com/coreos/go-systemd/v22 v22.5.0/go.mod h1:Y58oyj3AT4RCenI/lSvhwexgC+NSVTIJ3seZv2GcEnc=
 github.com/corrupt/go-smbus v0.0.0-20161116095124-d22f26546b05 h1:Ckb292DqV5bYqBJp/Quc+tZNkaqHhtXdUtg4fkE/ags=
 github.com/corrupt/go-smbus v0.0.0-20161116095124-d22f26546b05/go.mod h1:uEv7CjFLJMMPbXylPmgImmFEbutSu5MsgYS1Jt5DG80=
@@ -35,3 +37,9 @@ golang.org/x/xerrors v0.0.0-20191204190536-9bdfabe68543 h1:E7g+9GITq07hpfrRu66IV
 golang.org/x/xerrors v0.0.0-20191204190536-9bdfabe68543/go.mod h1:I/5z698sn9Ka8TeJc9MKroUUfqBBauWjQqLJ2OPfmY0=
 google.golang.org/protobuf v1.34.2 h1:6xV6lTsCfpGD21XK49h7MhtcApnLqkfYgPcdHftf6hg=
 google.golang.org/protobuf v1.34.2/go.mod h1:qYOHts0dSfpeUzUFpOMr/WGzszTmLH+DiWniOlNbLDw=
+
+
+github.com/MrBuggy-Amsterdam/buggy-log v1.0.1 h1:b9GB4fODvFGHSBU8uTgFUMnaDvZGONuSRq3BtULvrpE=
+github.com/MrBuggy-Amsterdam/buggy-log v1.0.1/go.mod h1:Oa8O9u/aWkfE9mXiSO5vSbCD4mYaB1DgCcb6lBFz6Ao=
+github.com/corrupt/go-smbus v0.0.0-20161116095124-d22f26546b05 h1:Ckb292DqV5bYqBJp/Quc+tZNkaqHhtXdUtg4fkE/ags=
+github.com/corrupt/go-smbus v0.0.0-20161116095124-d22f26546b05/go.mod h1:uEv7CjFLJMMPbXylPmgImmFEbutSu5MsgYS1Jt5DG80=

@@ -4,13 +4,9 @@ import (
 	"fmt"
 	"os"
 	"time"
-
+	"github.com/rs/zerolog/log"
 	pb_outputs "github.com/VU-ASE/rovercom/packages/go/outputs"
 	roverlib "github.com/VU-ASE/roverlib-go/src"
-
-	urm09_driver "github.com/MrBuggy-Amsterdam/go-urm09driver"
-
-	"github.com/rs/zerolog/log"
 )
 
 const (
@@ -23,11 +19,8 @@ const (
 type urm09 struct {
 	bus      uint
 	address  uint8
-	urm      *urm09_driver.URM09
+	urm      *URM09
 	pollRate time.Duration
-
-	// An outgress to write values to
-	// outgress shareddata.DistanceChan // what is this???
 }
 
 // NewURM09 creates a new URM09 sensor with default values
@@ -36,28 +29,16 @@ func NewURM09(pollRate time.Duration) *urm09 {
 		bus:      defaultBus,
 		address:  defaultAddress,
 		pollRate: pollRate,
-		urm:      urm09_driver.Initialize(defaultBus, defaultAddress),
+		urm:      Initialize(defaultBus, defaultAddress),
 	}
-
-	// u.outgress = make(shareddata.DistanceChan)
-
 	return u
 }
-
-// // GetOutgress returns the outgress channel
-// func (u *urm09) GetOutgress() shareddata.DistanceChan {
-// 	return u.outgress
-// }
-
 
 func run(service roverlib.Service, configuration *roverlib.ServiceConfiguration) error {
 	if configuration == nil {
 		return fmt.Errorf("configuration cannot be accessed")
 	}
 
-	//
-	// Access the service configuration, to use runtime parameters
-	//
 	pollDelay, err := configuration.GetFloatSafe("polling-delay")
 	if err != nil {
 		return fmt.Errorf("failed to get configuration: %v", err)
@@ -69,7 +50,7 @@ func run(service roverlib.Service, configuration *roverlib.ServiceConfiguration)
 		return fmt.Errorf("failed to get write stream")
 	}
 
-
+	// initialize the urm09 sensor
 	pollRate := time.Duration(pollDelay) * time.Millisecond
 	distanceSensor := NewURM09(pollRate)
 	err = distanceSensor.urm.EnablePassiveMode()
@@ -78,7 +59,7 @@ func run(service roverlib.Service, configuration *roverlib.ServiceConfiguration)
 	}
 	
 	for {
-
+		// read the distance measured by the sensor
 		distance, err := distanceSensor.urm.ReadDistance()
 		if err != nil {
 			log.Info().Msg("Failed to read distance")
@@ -89,6 +70,7 @@ func run(service roverlib.Service, configuration *roverlib.ServiceConfiguration)
 			distance = maxDistanceCm
 		}
 
+		// Send it for the actuator (and others) to use
 		err = writeStream.Write(
 			&pb_outputs.SensorOutput{
 				SensorId:  2,
@@ -101,7 +83,6 @@ func run(service roverlib.Service, configuration *roverlib.ServiceConfiguration)
 				},
 			},
 		)
-		// Send it for the actuator (and others) to use
 		if err != nil {
 			log.Err(err).Msg("Failed to send controller output")
 			continue
@@ -116,18 +97,10 @@ func run(service roverlib.Service, configuration *roverlib.ServiceConfiguration)
 // This function gets called when roverd wants to terminate the service
 func onTerminate(sig os.Signal) error {
 	log.Info().Str("signal", sig.String()).Msg("Terminating service")
-
-	//
-	// ...
-	// Any clean up logic here
-	// ...
-	//
-
 	return nil
 }
 
 // This is just a wrapper to run the user program
-// it is not recommended to put any other logic here
 func main() {
 	roverlib.Run(run, onTerminate)
 }
