@@ -4,9 +4,10 @@ import (
 	"fmt"
 	"os"
 	"time"
-	"github.com/rs/zerolog/log"
+
 	pb_outputs "github.com/VU-ASE/rovercom/packages/go/outputs"
 	roverlib "github.com/VU-ASE/roverlib-go/src"
+	"github.com/rs/zerolog/log"
 )
 
 const (
@@ -45,7 +46,7 @@ func run(service roverlib.Service, configuration *roverlib.ServiceConfiguration)
 	}
 	log.Info().Msgf("Fetched runtime configuration polling delay: %f", pollDelay)
 
-	writeStream := service.GetWriteStream("distance-m")
+	writeStream := service.GetWriteStream("distance")
 	if writeStream == nil {
 		return fmt.Errorf("failed to get write stream")
 	}
@@ -57,7 +58,7 @@ func run(service roverlib.Service, configuration *roverlib.ServiceConfiguration)
 	if err != nil {
 		log.Err(err).Msg("Failed to enable passive mode")
 	}
-	
+
 	for {
 		// read the distance measured by the sensor
 		distance, err := distanceSensor.urm.ReadDistance()
@@ -74,7 +75,7 @@ func run(service roverlib.Service, configuration *roverlib.ServiceConfiguration)
 		err = writeStream.Write(
 			&pb_outputs.SensorOutput{
 				SensorId:  2,
-				Status: 0,
+				Status:    0,
 				Timestamp: uint64(time.Now().UnixMilli()),
 				SensorOutput: &pb_outputs.SensorOutput_DistanceOutput{
 					DistanceOutput: &pb_outputs.DistanceSensorOutput{
