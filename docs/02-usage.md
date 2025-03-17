@@ -19,6 +19,6 @@ err = writeStream.Write(
     },
 )
 ```
-## Driver
+## Implementation Details
 
-This service requires a URM09 driver to work. The driver contains functions necessary to initialize the sensor and read data from it. This is abstracted away and you do not need to worry about it. In order to initialize the sensor, first an instance of `URM09` is defined by passing the default values for bus number and the address of the sensor. Keep in mind that changing these values may result in you (or the debix) not being able to find the device on the bus. To read the distance value, use `ReadDistance()` method. 
+We have implemented the communication with the URM09 sensor directly in Go which can be found under [`src/urm09.go`](https://github.com/VU-ASE/distance/blob/main/src/urm09.go). It thus does not deppend on any 3rd party drivers.
