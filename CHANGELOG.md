@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.2](https://github.com/VU-ASE/distance/compare/v1.0.1...v1.0.2) (2025-03-28)
+
+
+### Bug Fixes
+
+* distance now crashes when no distance sensor is installed ([3fc4416](https://github.com/VU-ASE/distance/commit/3fc441675479149074211cb813a88b3df14d145e))
+* driver details ([25a62fc](https://github.com/VU-ASE/distance/commit/25a62fc16469c1604da9bd4290e74854a0836402))
+
 ## [1.0.1](https://github.com/VU-ASE/distance/compare/v1.0.0...v1.0.1) (2025-03-13)
 
 
