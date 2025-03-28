@@ -32,6 +32,9 @@ func NewURM09(pollRate time.Duration) *urm09 {
 		pollRate: pollRate,
 		urm:      Initialize(defaultBus, defaultAddress),
 	}
+	if(u.urm == nil){
+		return nil;
+	}
 	return u
 }
 
@@ -54,6 +57,10 @@ func run(service roverlib.Service, configuration *roverlib.ServiceConfiguration)
 	// initialize the urm09 sensor
 	pollRate := time.Duration(pollDelay) * time.Millisecond
 	distanceSensor := NewURM09(pollRate)
+	if distanceSensor == nil {
+		return fmt.Errorf("failed to initialize distance sensor")
+	}
+
 	err = distanceSensor.urm.EnablePassiveMode()
 	if err != nil {
 		log.Err(err).Msg("Failed to enable passive mode")
