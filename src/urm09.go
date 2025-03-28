@@ -61,16 +61,19 @@ func Initialize(bus uint, address uint8) *URM09 {
 	i2c, err := smbus.New(bus, address)
 	if err != nil {
 		log.Err(err).Msg("Failed to initialize i2c")
+		return nil
 	}
 
 	urm := new(i2c)
 	if err != nil {
 		log.Err(err).Msg("Failed to initialize urm on the bus")
+		return nil
 	}
 
 	err = urm.EnablePassiveMode()
 	if err != nil {
 		log.Err(err).Msg("Failed to enable passive mode")
+		return nil
 	}
 
 	log.Debug().Msgf("Initialized URM09 controller on bus %d (0x%x)", bus, address)
