@@ -29,7 +29,9 @@ func new(bus *smbus.SMBus) *URM09 {
 
 func (u *URM09) ReadDistance() (int, error) {
 	// Initialize a ranging request
-	u.bus.Write_byte_data(commandRegister, 0x01)
+	if u.bus.Write_byte_data(commandRegister, 0x01) != nil {
+		log.Error().Msg("Failed to write command to URM09")
+	}
 
 	// Read the results
 	lowBits, err := u.bus.Read_byte_data(lowOrderBitsRegister)
