@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.0.0](https://github.com/VU-ASE/distance/compare/v1.0.2...v2.0.0) (2025-07-31)
+
+
+### ⚠ BREAKING CHANGES
+
+* update to rovercom-v2
+
+### Features
+
+* added pr as even trigger for build ([90aec29](https://github.com/VU-ASE/distance/commit/90aec291f3ece2d19f390ff157556fae0051de0e))
+* update to rovercom-v2 ([83ef7ef](https://github.com/VU-ASE/distance/commit/83ef7efcc6f71916585b7b47efd3042bb086023a))
+
+
+### Bug Fixes
+
+* added error check for u.bus.Write_byte_data and buildvcs=false ([5c41db2](https://github.com/VU-ASE/distance/commit/5c41db2c5bdd23ad4fe0f93695b4c758d58ff82f))
+
 ## [1.0.2](https://github.com/VU-ASE/distance/compare/v1.0.1...v1.0.2) (2025-03-28)
 
 
