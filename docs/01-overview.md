@@ -7,7 +7,7 @@ import TabItem from '@theme/TabItem';
 
 The `distance` service uses the urm09 ultrasound sensor to measure the distance to an object in front of a Rover using a single point beam. This distance is measured in meters.
 
-![Schematic of the distance measured to a block on the track](/drawings/distance-dimetric.png)
+![Schematic of the distance measured to a block on the track](https://github.com/user-attachments/assets/62b7b239-4040-489e-bb96-c8ee2914ee32)
 
 *The red beam represents the distance measured from the front of the Rover to the object.*
 
