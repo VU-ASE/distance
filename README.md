@@ -7,4 +7,4 @@
 </div>
 <br/>
 
-**`distance` is a small service that reads the distance measured by a urm09 ultrasound sensor attached to the car. This service does not take any input and produces an output stream with continuously updated `distance` value in `meters`.**
+**This repository houses the `distance` [service](https://ase.vu.nl/docs/framework/glossary/service), which can be used in a [pipeline](https://ase.vu.nl/docs/framework/glossary/pipeline) on an ASE Rover. To get started, take a look at its [documentation](https://ase.vu.nl/docs/category/distance)**
